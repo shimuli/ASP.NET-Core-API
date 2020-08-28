@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ParkApi</name>
+    </assembly>
+    <members>
+        <member name="M:ParkApi.Controllers.NationalParksController.GetNationalParks">
+            <summary>
+            Get List of all registered National Parks in Kenya
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.NationalParksController.GetNationalPark(System.Int32)">
+            <summary>
+            Get One Registered National PArk in Kenya
+            </summary>
+            <param name="nationalParkId">The Id of the national Park</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.NationalParksController.CreateNationalPark(ParkApi.Models.Dtos.NationalParkDto)">
+            <summary>
+            Post a national Park
+            </summary>
+            <param name="nationalParkDto">Information required to do the update</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.NationalParksController.UpdateNationalPark(System.Int32,ParkApi.Models.Dtos.NationalParkDto)">
+            <summary>
+            Update a national Park
+            </summary>
+            <param name="nationalParkId">National Park Id</param>
+            <param name="nationalParkDto">National Park data to update</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.NationalParksController.DeleteNationalPark(System.Int32)">
+            <summary>
+            Delete a National Park
+            </summary>
+            <param name="nationalParkId">National Park Id</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

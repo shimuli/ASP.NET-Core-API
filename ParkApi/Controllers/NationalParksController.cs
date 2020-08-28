@@ -13,9 +13,10 @@ namespace ParkApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class NationalParksController : Controller
     {
-        private INationalParkRepo _npRepo;
+        private readonly INationalParkRepo _npRepo;
         private readonly IMapper _imapper;
 
         public NationalParksController(INationalParkRepo npRepo, IMapper imapper)
@@ -23,7 +24,13 @@ namespace ParkApi.Controllers
             _npRepo = npRepo;
             _imapper = imapper;
         }
+
+        /// <summary>
+        /// Get List of all registered National Parks in Kenya
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(200,Type =typeof(List<NationalParkDto>))]
         public IActionResult GetNationalParks()
         {
             var objList = _npRepo.GetNationalParks();
@@ -35,7 +42,16 @@ namespace ParkApi.Controllers
             }
             return Ok(objDto);
         }
+
+        /// <summary>
+        /// Get One Registered National PArk in Kenya
+        /// </summary>
+        /// <param name="nationalParkId">The Id of the national Park</param>
+        /// <returns></returns>
         [HttpGet("{nationalParkId:int}", Name = "GetNationalPark")]
+        [ProducesResponseType(200, Type = typeof(NationalParkDto))]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
         public IActionResult GetNationalPark(int nationalParkId)
         {
             var obj = _npRepo.GetNationalPark(nationalParkId);
@@ -44,10 +60,25 @@ namespace ParkApi.Controllers
                 return NotFound();
             }
             var objDto = _imapper.Map<NationalParkDto>(obj);
+           /* var objDto = new NationalParkDto()
+            {
+                Created = obj.Created,
+                Id = obj.Id,
+                Name = obj.Name,
+                State = obj.State,
+            };
+           */
             return Ok(objDto);
         }
-
+        /// <summary>
+        /// Post a national Park
+        /// </summary>
+        /// <param name="nationalParkDto">Information required to do the update</param>
+        /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(NationalParkDto))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateNationalPark([FromBody] NationalParkDto nationalParkDto)
         {
             if(nationalParkDto == null)
@@ -73,8 +104,16 @@ namespace ParkApi.Controllers
                 nationalParkId = nationalParkObj.Id
             }, nationalParkObj);
         }
-
+        /// <summary>
+        /// Update a national Park
+        /// </summary>
+        /// <param name="nationalParkId">National Park Id</param>
+        /// <param name="nationalParkDto">National Park data to update</param>
+        /// <returns></returns>
         [HttpPatch("{nationalParkId:int}", Name = "GetNationalPark")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateNationalPark(int nationalParkId, [FromBody] NationalParkDto nationalParkDto)
         {
             if (nationalParkDto == null || nationalParkId!=nationalParkDto.Id)
@@ -92,8 +131,16 @@ namespace ParkApi.Controllers
 
 
         }
-
+        /// <summary>
+        /// Delete a National Park
+        /// </summary>
+        /// <param name="nationalParkId">National Park Id</param>
+        /// <returns></returns>
         [HttpDelete("{nationalParkId:int}", Name = "GetNationalPark")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteNationalPark (int nationalParkId) {
 
             if (!_npRepo.NationalParkExists(nationalParkId))

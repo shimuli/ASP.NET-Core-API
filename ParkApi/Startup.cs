@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +37,30 @@ namespace ParkApi
             (Configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper(typeof(ParkMapper));
             services.AddScoped<INationalParkRepo, NationalParkRepo>();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("ParkOpenApiSpec", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title="Kenyanparks",
+                    Version= "1",
+                    Description =" National Park Open Api",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                    {
+                        Email = "shimulicedric@gmail.com",
+                        Name = "Shimuli Cedric",
+                        Url = new Uri("https://github.com/shimuli/ASP.NET-Core-API")
+                    },
+
+                    License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                    {
+                        Name = "MIT Licence",
+                        Url = new Uri("https://github.com/shimuli/ASP.NET-Core-API")
+                    }
+                });
+                var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
+                options.IncludeXmlComments(cmlCommentsFullPath);
+            });
             services.AddControllers();
         }
 
@@ -47,11 +73,15 @@ namespace ParkApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/ParkOpenApiSpec/swagger.json", "Park Api");
+                options.RoutePrefix = "";
+            });
+           
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
