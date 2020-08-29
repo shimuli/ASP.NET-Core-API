@@ -14,6 +14,7 @@ namespace ParkApi.Controllers
 {
     [Route("api/Trails")]
     [ApiController]
+    //[ApiExplorerSettings(GroupName = "ParkOpenApiSpecTrails")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class TrailsController : Controller
     {
@@ -27,7 +28,7 @@ namespace ParkApi.Controllers
         }
 
         /// <summary>
-        /// Get List of all registered National Parks in Kenya
+        /// Get List of all Trails
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -45,9 +46,9 @@ namespace ParkApi.Controllers
         }
 
         /// <summary>
-        /// Get One Registered National PArk in Kenya
+        /// Get One Traila
         /// </summary>
-        /// <param name="trailId">The Id of the national Park</param>
+        /// <param name="trailId">The Id of the Trail</param>
         /// <returns></returns>
         [HttpGet("{trailId:int}", Name = "GetTrail")]
         [ProducesResponseType(200, Type = typeof(TrailDto))]
@@ -72,7 +73,7 @@ namespace ParkApi.Controllers
             return Ok(objDto);
         }
         /// <summary>
-        /// Post a national Park
+        /// Post a trail
         /// </summary>
         /// <param name="trailDto">Information required to do the update</param>
         /// <returns></returns>
@@ -106,10 +107,10 @@ namespace ParkApi.Controllers
             }, trailObj);
         }
         /// <summary>
-        /// Update a national Park
+        /// Update a trail
         /// </summary>
-        /// <param name="trailId">National Park Id</param>
-        /// <param name="trailDto">National Park data to update</param>
+        /// <param name="trailId">Trail Id</param>
+        /// <param name="trailDto">Trail data to update</param>
         /// <returns></returns>
         [HttpPatch("{trailId:int}", Name = "GetTrail")]
         [ProducesResponseType(204)]
@@ -133,9 +134,9 @@ namespace ParkApi.Controllers
 
         }
         /// <summary>
-        /// Delete a National Park
+        /// Delete a trail
         /// </summary>
-        /// <param name="trailId">National Park Id</param>
+        /// <param name="trailId">Trail Id</param>
         /// <returns></returns>
         [HttpDelete("{trailId:int}", Name = "GetTrail")]
         [ProducesResponseType(204)]

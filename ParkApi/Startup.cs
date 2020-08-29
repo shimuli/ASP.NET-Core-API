@@ -38,6 +38,12 @@ namespace ParkApi
             services.AddAutoMapper(typeof(ParkMapper));
             services.AddScoped<INationalParkRepo, NationalParkRepo>();
             services.AddScoped<ITrailRepo, TrailRepo>();
+            services.AddApiVersioning(options =>
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ReportApiVersions = true;
+            });
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("ParkOpenApiSpec", new Microsoft.OpenApi.Models.OpenApiInfo()
@@ -58,6 +64,26 @@ namespace ParkApi
                         Url = new Uri("https://github.com/shimuli/ASP.NET-Core-API")
                     }
                 });
+
+              /*  options.SwaggerDoc("ParkOpenApiSpecTrails", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "Trails Api",
+                    Version = "1",
+                    Description = " Trails",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                    {
+                        Email = "shimulicedric@gmail.com",
+                        Name = "Shimuli Cedric",
+                        Url = new Uri("https://github.com/shimuli/ASP.NET-Core-API")
+                    },
+
+                    License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                    {
+                        Name = "MIT Licence",
+                        Url = new Uri("https://github.com/shimuli/ASP.NET-Core-API")
+                    }
+                });
+              */
                 var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
                 options.IncludeXmlComments(cmlCommentsFullPath);
@@ -77,7 +103,8 @@ namespace ParkApi
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/ParkOpenApiSpec/swagger.json", "Park Api");
+                options.SwaggerEndpoint("/swagger/ParkOpenApiSpec/swagger.json", "Parks Api National Parks");
+               // options.SwaggerEndpoint("/swagger/ParkOpenApiSpecTrails/swagger.json", "Parks Api Trails");
                 options.RoutePrefix = "";
             });
            

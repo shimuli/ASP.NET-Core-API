@@ -13,6 +13,7 @@ namespace ParkApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[ApiExplorerSettings(GroupName = "ParkOpenApiSpecNationalParks")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class NationalParksController : Controller
     {
