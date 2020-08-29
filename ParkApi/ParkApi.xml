@@ -39,5 +39,40 @@
             <param name="nationalParkId">National Park Id</param>
             <returns></returns>
         </member>
+        <member name="M:ParkApi.Controllers.TrailsController.GetTrails">
+            <summary>
+            Get List of all registered National Parks in Kenya
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.TrailsController.GetTrail(System.Int32)">
+            <summary>
+            Get One Registered National PArk in Kenya
+            </summary>
+            <param name="trailId">The Id of the national Park</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.TrailsController.CreateTrail(ParkApi.Data.Dtos.TrailDto)">
+            <summary>
+            Post a national Park
+            </summary>
+            <param name="trailDto">Information required to do the update</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.TrailsController.UpdateTrail(System.Int32,ParkApi.Data.Dtos.TrailDto)">
+            <summary>
+            Update a national Park
+            </summary>
+            <param name="trailId">National Park Id</param>
+            <param name="trailDto">National Park data to update</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkApi.Controllers.TrailsController.DeleteTrail(System.Int32)">
+            <summary>
+            Delete a National Park
+            </summary>
+            <param name="trailId">National Park Id</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

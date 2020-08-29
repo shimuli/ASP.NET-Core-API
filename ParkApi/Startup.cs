@@ -37,6 +37,7 @@ namespace ParkApi
             (Configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper(typeof(ParkMapper));
             services.AddScoped<INationalParkRepo, NationalParkRepo>();
+            services.AddScoped<ITrailRepo, TrailRepo>();
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("ParkOpenApiSpec", new Microsoft.OpenApi.Models.OpenApiInfo()

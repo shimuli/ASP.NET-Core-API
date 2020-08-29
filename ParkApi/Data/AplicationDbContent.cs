@@ -17,5 +17,6 @@ namespace ParkApi.Data
         }
         //add national park to db
         public DbSet<NationalPark> NationalParks { get; set; }
+        public DbSet<Trail> Trails { get; set; }
     }
 }
