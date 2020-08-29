@@ -52,14 +52,14 @@
             <param name="trailId">The Id of the national Park</param>
             <returns></returns>
         </member>
-        <member name="M:ParkApi.Controllers.TrailsController.CreateTrail(ParkApi.Data.Dtos.TrailDto)">
+        <member name="M:ParkApi.Controllers.TrailsController.CreateTrail(ParkApi.Data.Dtos.TrailCreateDto)">
             <summary>
             Post a national Park
             </summary>
             <param name="trailDto">Information required to do the update</param>
             <returns></returns>
         </member>
-        <member name="M:ParkApi.Controllers.TrailsController.UpdateTrail(System.Int32,ParkApi.Data.Dtos.TrailDto)">
+        <member name="M:ParkApi.Controllers.TrailsController.UpdateTrail(System.Int32,ParkApi.Data.Dtos.TrailUpdateDto)">
             <summary>
             Update a national Park
             </summary>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ParkApi.Data.Dtos;
 using ParkApi.Models;
 using ParkApi.Models.Dtos;
 using System;
@@ -13,6 +14,9 @@ namespace ParkApi.Mappers
         public ParkMapper()
         {
             CreateMap<NationalPark, NationalParkDto>().ReverseMap();
+            CreateMap<Trail, TrailDto>().ReverseMap();
+            CreateMap<Trail, TrailCreateDto>().ReverseMap();
+            CreateMap<Trail, TrailUpdateDto>().ReverseMap();
         }
     }
 }
